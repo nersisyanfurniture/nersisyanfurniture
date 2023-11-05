@@ -26,26 +26,27 @@
         });
 
     }
-    function copyTextToClipboard() {
-            // Get the text to copy
-            var textToCopy = document.getElementById("textToCopy");
 
-            // Create a text area element to hold the text
-            var textArea = document.createElement("textarea");
-            textArea.value = textToCopy.textContent;
+    // Open the lightbox and display the clicked image
+function openLightbox(imageSrc) {
+    var lightbox = document.getElementById("lightbox");
+    var lightboxImg = document.getElementById("lightbox-img");
 
-            // Append the text area to the document
-            document.body.appendChild(textArea);
+    lightbox.style.display = "block";
+    lightboxImg.src = imageSrc;
+}
 
-            // Select the text inside the text area
-            textArea.select();
+// Close the lightbox
+function closeLightbox() {
+    var lightbox = document.getElementById("lightbox");
+    lightbox.style.display = "none";
+}
 
-            // Copy the selected text to the clipboard
-            document.execCommand("copy");
+// Attach click event handlers to your product images
+var productImages = document.getElementsByClassName("img");
 
-            // Remove the text area from the document
-            document.body.removeChild(textArea);
-
-            // Provide feedback to the user
-            alert("Text has been copied to the clipboard.");
-        }
+for (var i = 0; i < productImages.length; i++) {
+    productImages[i].addEventListener("click", function() {
+        openLightbox(this.src);
+    });
+}
